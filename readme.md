@@ -45,7 +45,7 @@ BookShelf-Backend/
 ### 1. Clone the repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+git https://github.com/Miskat-BD/BookManager-PostgreSQL.git
 ```
 
 ### 2. Go to the project directory
