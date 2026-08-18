@@ -1,8 +1,8 @@
-# BookShelf Backend 📚
+# BookManager Backend 📚
 
 A simple RESTful API for managing books, built with **Node.js, Express.js, and PostgreSQL**.
 
-This project demonstrates basic CRUD operations using PostgreSQL as the database and Express.js as the backend framework.
+This project demonstrates how to build a backend application with PostgreSQL and perform basic CRUD operations through RESTful APIs.
 
 ## 🚀 Features
 
@@ -21,7 +21,7 @@ This project demonstrates basic CRUD operations using PostgreSQL as the database
 * Node.js
 * Express.js
 * PostgreSQL
-* PostgreSQL `pg` library
+* pg
 * UUID
 * CORS
 * dotenv
@@ -30,13 +30,14 @@ This project demonstrates basic CRUD operations using PostgreSQL as the database
 ## 📁 Project Structure
 
 ```text
-BookShelf-Backend/
+BookManager/
 │
 ├── db.js
 ├── index.js
 ├── package.json
 ├── package-lock.json
 ├── .env
+├── .gitignore
 └── README.md
 ```
 
@@ -51,7 +52,7 @@ git https://github.com/Miskat-BD/BookManager-PostgreSQL.git
 ### 2. Go to the project directory
 
 ```bash
-cd BookShelf-Backend
+cd BookManager
 ```
 
 ### 3. Install dependencies
@@ -65,12 +66,11 @@ npm install
 Create a `.env` file in the root directory:
 
 ```env
+DATABASE_URL=your_postgresql_connection_string
 PORT=8000
 ```
 
-Add your PostgreSQL database connection information according to your local or hosted database setup.
-
-> Never commit your `.env` file or database password to GitHub.
+> Never commit your `.env` file or database credentials to GitHub.
 
 ### 5. Start the development server
 
@@ -86,7 +86,7 @@ http://localhost:8000
 
 ## 📌 API Endpoints
 
-### Get all books
+### Get All Books
 
 ```http
 GET /books
@@ -94,15 +94,15 @@ GET /books
 
 Returns all books from the database.
 
-### Get a single book
+### Get a Single Book
 
 ```http
 GET /books/:id
 ```
 
-Returns a specific book using its ID.
+Returns a specific book by its ID.
 
-### Create a book
+### Create a Book
 
 ```http
 POST /books
@@ -117,13 +117,13 @@ Request body:
 }
 ```
 
-### Update a book
+### Update a Book
 
 ```http
 PATCH /books/:id
 ```
 
-You can update only the field you need.
+You can update only the fields you want to change.
 
 Example:
 
@@ -133,19 +133,25 @@ Example:
 }
 ```
 
-### Delete a book
+### Delete a Book
 
 ```http
 DELETE /books/:id
 ```
 
-Deletes a book using its ID.
+Deletes a book by its ID.
 
 ## 🗄️ Database
 
-The project uses PostgreSQL with a `book` table.
+This project uses **PostgreSQL** as the database.
 
-Example table structure:
+The `book` table contains:
+
+* `id`
+* `name`
+* `description`
+
+Example:
 
 ```sql
 CREATE TABLE book (
@@ -157,7 +163,7 @@ CREATE TABLE book (
 
 ## 🧪 API Testing
 
-The API can be tested using tools such as:
+You can test the API using:
 
 * Postman
 * Thunder Client
@@ -165,16 +171,11 @@ The API can be tested using tools such as:
 
 ## 🔮 Future Improvements
 
-* Add authentication and authorization
-* Add pagination
-* Add search functionality
-* Add input validation
-* Add better error handling
 * Connect with a React/Next.js frontend
-* Deploy the backend and PostgreSQL database
+* Add authentication and authorization
+* Add search and filtering
+* Add pagination
+* Add input validation
+* Improve error handling
+* Deploy the backend
 
-## 👨‍💻 Author
-
-**Miskat Bin Habib**
-
-Full Stack Developer
