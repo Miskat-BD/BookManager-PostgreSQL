@@ -44,31 +44,68 @@ app.get("/books/:id", async (req, res) => {
     }
 })
 
+// app.post("/books", async (req, res) => {
+//     try {
+//         const { name, description, image, price } = req.body
+//         const id = uuidv4();
+//         // inserting book data into database
+//         const newBook = await pool.query("INSERT INTO book (id, name, description, image, price) VALUES ($1, $2, $3, $4, $5) RETURNING *", [
+//             id, name, description, image, price
+//         ])
+//         res.status(201).json({
+//             message: `Books was Created`,
+//             data: newBook.rows
+//         })
+//     } catch (error) {
+//         res.json({
+//             data: error,
+//             message: "Data doesn't Created"
+//         })
+//     }
+// })
 app.post("/books", async (req, res) => {
     try {
-        const { name, description } = req.body
-        const id = uuidv4();
-        // inserting book data into database
-        const newBook = await pool.query("INSERT INTO book (id, name, description) VALUES ($1, $2, $3) RETURNING *", [
-            id, name, description
-        ])
-        res.status(201).json({
-            message: `Books was Created`,
-            data: newBook.rows
-        })
-    } catch (error) {
-        res.json({
-            data: error,
-            message: "Data doesn't Created"
-        })
-    }
-})
+        console.log("========== POST /books ==========");
+        console.log("REQ BODY:", req.body);
 
+        const { name, description, image, price } = req.body;
+
+        console.log("name:", name);
+        console.log("description:", description);
+        console.log("image:", image);
+        console.log("price:", price);
+
+        const id = uuidv4();
+
+        const newBook = await pool.query(
+            `INSERT INTO book 
+            (id, name, description, image, price) 
+            VALUES ($1, $2, $3, $4, $5) 
+            RETURNING *`,
+            [id, name, description, image, price]
+        );
+
+        console.log("DATABASE RESULT:", newBook.rows);
+
+        res.status(201).json({
+            message: "Books was Created",
+            data: newBook.rows
+        });
+
+    } catch (error) {
+        console.log("ERROR:", error);
+
+        res.status(500).json({
+            error: error.message,
+            message: "Data doesn't Created"
+        });
+    }
+});
 app.patch("/books/:id", async (req, res) => {
     try {
         const { id } = req.params
-        const { name, description } = req.body
-        const book = await pool.query("UPDATE book SET name=COALESCE($1, name), description=COALESCE($2, description) WHERE id=$3 RETURNING *", [name, description, id])
+        const { name, description, image, price } = req.body
+        const book = await pool.query("UPDATE book SET name=COALESCE($1, name), description=COALESCE($2, description), image=COALESCE($3, image), price=COALESCE($4, price) WHERE id=$5 RETURNING *", [name, description, image, price, id])
         res.json({
             message: "Data is Updated",
             data: book.rows
