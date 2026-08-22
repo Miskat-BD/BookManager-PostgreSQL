@@ -44,25 +44,6 @@ app.get("/books/:id", async (req, res) => {
     }
 })
 
-// app.post("/books", async (req, res) => {
-//     try {
-//         const { name, description, image, price } = req.body
-//         const id = uuidv4();
-//         // inserting book data into database
-//         const newBook = await pool.query("INSERT INTO book (id, name, description, image, price) VALUES ($1, $2, $3, $4, $5) RETURNING *", [
-//             id, name, description, image, price
-//         ])
-//         res.status(201).json({
-//             message: `Books was Created`,
-//             data: newBook.rows
-//         })
-//     } catch (error) {
-//         res.json({
-//             data: error,
-//             message: "Data doesn't Created"
-//         })
-//     }
-// })
 app.post("/books", async (req, res) => {
     try {
         console.log("========== POST /books ==========");
